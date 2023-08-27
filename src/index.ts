@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 import fs from "fs";
+import path from "path";
 import chalk from "chalk";
 
 const { lstat } = fs.promises; //destructore the promisified version of lstat function from fs promises API
-
-fs.readdir(process.cwd(), async (err, files) => {
+const targetDir = process.argv[2] || process.cwd();
+fs.readdir(targetDir, async (err, files) => {
   //throw error if failed to read files
   if (err) {
     throw new Error(err.message);
@@ -12,7 +13,7 @@ fs.readdir(process.cwd(), async (err, files) => {
 
   //find the stats (atributes of each file)
   const statPromises = files.map((file) => {
-    return lstat(file);
+    return lstat(path.join(targetDir, file));
   });
 
   try {
