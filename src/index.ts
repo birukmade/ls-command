@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from "fs";
+import chalk from "chalk";
 
 const { lstat } = fs.promises; //destructore the promisified version of lstat function from fs promises API
 
@@ -17,7 +18,9 @@ fs.readdir(process.cwd(), async (err, files) => {
   try {
     const fileStats = await Promise.all(statPromises);
     fileStats.forEach((fileStat, index) => {
-      console.log(files[index], fileStat.isFile());
+      !fileStat.isFile()
+        ? console.log(chalk.bold.green(files[index]))
+        : console.log(chalk.italic.yellow(files[index]));
     });
   } catch (err) {
     throw new Error("failed analysing file/folder");

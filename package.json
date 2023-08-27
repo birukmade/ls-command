@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
     "@types/node": "^20.5.6",
     "concurrently": "^8.2.1",
     "nodemon": "^3.0.1",
@@ -19,5 +20,8 @@
   },
   "bin": {
     "lst": "./bin/index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2"
   }
 }
