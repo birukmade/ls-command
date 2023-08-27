@@ -21,7 +21,11 @@ fs.readdir(targetDir, async (err, files) => {
     fileStats.forEach((fileStat, index) => {
       !fileStat.isFile()
         ? console.log(chalk.bold.green(files[index]))
-        : console.log(chalk.italic.yellow(files[index]));
+        : console.log(
+            chalk.italic.yellow(files[index]) +
+              " --- " +
+              chalk.yellow(fileStat.size / 1000 + " KB")
+          );
     });
   } catch (err) {
     throw new Error("failed analysing file/folder");
